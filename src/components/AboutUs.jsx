@@ -82,7 +82,7 @@ export default function AboutUs() {
                     borderColor: "white",
                   },
                 }}
-                onClick={() => naget("//produtdetails/:id")}
+                onClick={() => naget("/produtdetails/:id")}
               >
                 Product
               </Button>
