@@ -114,7 +114,7 @@ export default function Home() {
                     fontSize: "1rem",
                     fontWeight: 500,
                     width: { xs: "auto", md: "170px" }, 
-                     marginLeft:{xs:"75px",md:"0px"},
+                     marginLeft:{xs:"90px",md:"0px"},
                     "&:hover": {
                       borderColor: "#fff",
                       backgroundColor: "rgba(255,255,255,0.08)",
