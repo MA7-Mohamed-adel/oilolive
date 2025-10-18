@@ -20,6 +20,7 @@ export default function Home() {
           px: { xs: 2, sm: 4, md: 6 },
           py: { xs: 4, sm: 5, md: 6 },
         }}
+    
       >
         <Grid
           container
@@ -28,12 +29,12 @@ export default function Home() {
           justifyContent="center"
           flex={"1 1 auto"}
         >
-          {/* الصورة */}
           <Grid
             item
             xs={12}
             md={6}
             sx={{ display: "flex", justifyContent: "center" }}
+                marginTop={"50px"}
           >
             <Box
               component="img"
