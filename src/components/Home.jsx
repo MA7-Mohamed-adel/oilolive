@@ -99,8 +99,9 @@ export default function Home() {
                 finish.
               </Typography>
 
-              <Box>
+              <Box  >
                 <Button
+                 
                   variant="outlined"
                   sx={{
                     fontFamily: "'Inter', sans-serif",
@@ -113,6 +114,7 @@ export default function Home() {
                     fontSize: "1rem",
                     fontWeight: 500,
                     width: { xs: "auto", md: "170px" }, 
+                    
                     "&:hover": {
                       borderColor: "#fff",
                       backgroundColor: "rgba(255,255,255,0.08)",

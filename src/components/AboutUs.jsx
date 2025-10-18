@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutUs() {
+  const naget = useNavigate()
   return (
     <>
     <Box
@@ -80,6 +82,7 @@ export default function AboutUs() {
                     borderColor: "white",
                   },
                 }}
+                onClick={() => naget("//produtdetails/:id")}
               >
                 Product
               </Button>
