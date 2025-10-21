@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
-
+import aa from "../assets/aa.jpg"
 export default function AboutUs() {
   const naget = useNavigate()
   return (
@@ -99,7 +99,7 @@ export default function AboutUs() {
         >
           <Box
             component="img"
-            src="https://neo-haven.com/cdn/shop/files/food-and-beverage-minimal-4-middle.jpg?v=1759225751&width=1500"
+            src={aa}
             alt="Hero"
             sx={{
               width: { xs: "85%", sm: "100%" },

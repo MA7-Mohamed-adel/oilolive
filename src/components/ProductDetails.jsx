@@ -26,9 +26,13 @@ const productData = {
   id: 1,
   brand: "olive-aura",
   name: "OLIVE OIL",
-  prices: {
+  prices: { // السعر بعد الخصم
     "1kg": 350,
-    "0.5kg": 200,
+    "0.5kg": 175,
+  },
+  originalPrices: { // السعر الأصلي
+    "1kg": 700,
+    "0.5kg": 350,
   },
   defaultWeight: "1kg",
   description:
@@ -46,6 +50,7 @@ export default function ProductDetails({ product = productData }) {
   const dispatch = useDispatch();
 
   const currentPrice = product.prices[selectedWeight];
+  const originalPrice = product.originalPrices[selectedWeight];
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () =>
@@ -143,18 +148,29 @@ export default function ProductDetails({ product = productData }) {
                 {product.name}
               </Typography>
 
-              <Typography
-                variant="h5"
-                sx={{
-                  fontWeight: "500",
-                  mb: 3,
-                  color: "white",
-                  fontSize: { xs: "1.25rem", md: "1.5rem" },
-                }}
-              >
-                 {currentPrice.toFixed(2)} EGP 
-              </Typography>
-               
+              <Box display="flex" alignItems="center" gap={2} mb={3}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: "500",
+                    color: "white",
+                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                  }}
+                >
+                  {currentPrice.toFixed(2)} EGP
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "500",
+                    color: "grey.500",
+                    textDecoration: "line-through",
+                    fontSize: { xs: "1rem", md: "1.25rem" },
+                  }}
+                >
+                  {originalPrice.toFixed(2)} EGP
+                </Typography>
+              </Box>
 
               <Typography sx={{ color: "white" }} fontWeight="500" mb={1}>
                 Weight
