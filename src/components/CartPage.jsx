@@ -151,7 +151,7 @@ const dispatch = useDispatch();
               px: 4,
               "&:hover": { bgcolor: "#ddd" },
             }}
-            onClick={() => navegt("/")}
+            onClick={() => navegt("/produtdetails/:id")}
           >
             Continue Shopping
           </Button>
