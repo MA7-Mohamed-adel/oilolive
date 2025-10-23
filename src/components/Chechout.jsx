@@ -39,7 +39,7 @@ export default function Chechout() {
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
-  const shippingCost = address && city && state && zip ? 10 : 0;
+  const shippingCost = address && city && state && zip ? 90 : 0;
   const totalAmount = subtotal + shippingCost;
   const dispa = useDispatch();
 
