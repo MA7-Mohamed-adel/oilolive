@@ -214,7 +214,7 @@ ${item.name}
               <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Typography>Shipping</Typography>
                 {address && city && state && zip ? (
-                  <Typography>10.00EGP</Typography>
+                  <Typography>90.00EGP</Typography>
                 ) : (
                   <Typography color="text.secondary">Enter address</Typography>
                 )}
