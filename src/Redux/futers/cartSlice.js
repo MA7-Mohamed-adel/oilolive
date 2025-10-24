@@ -23,13 +23,18 @@ export const cartSlice = createSlice({
       if (index >= 0) {
         // لو المنتج موجود، نزود الكمية بمقدار اللي المستخدم اختاره
         state.cart[index].qty += action.payload.qty || 1;
+               Swal.fire({
+    title: "Good job!",
+    text: "تم اضافه المنتج مره ثانيه في السله",
+     icon: "success"
+});
       } else {
         // لو المنتج جديد، نحفظ الكمية اللي المستخدم اختارها
         state.cart.push({ ...action.payload, qty: action.payload.qty || 1 });
           Swal.fire({
-  title: "Good job!",
-  text: "تم اضافه المنتج في السله",
-  icon: "success"
+    title: "Good job!",
+    text: "تم اضافه المنتج في السله",
+     icon: "success"
 });
         }
     },
@@ -38,8 +43,7 @@ export const cartSlice = createSlice({
     },
     delate: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
-            alert("Product deleted successfully")
-
+      
     },
     onIncomaent: (state, action) => {
       state.cart = state.cart.map((item) => {
