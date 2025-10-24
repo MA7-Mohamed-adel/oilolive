@@ -39,7 +39,7 @@ export default function Chechout() {
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
-  const shippingCost = address && city && state && zip ? 90 : 0;
+  const shippingCost = address && city && state && zip ? 50 : 0;
   const totalAmount = subtotal + shippingCost;
   const dispa = useDispatch();
 
@@ -214,7 +214,7 @@ ${item.name}
               <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Typography>Shipping</Typography>
                 {address && city && state && zip ? (
-                  <Typography>90.00EGP</Typography>
+                  <Typography>50.00EGP</Typography>
                 ) : (
                   <Typography color="text.secondary">Enter address</Typography>
                 )}
