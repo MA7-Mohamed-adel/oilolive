@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const initialState = {
   cart: [],
@@ -25,7 +26,11 @@ export const cartSlice = createSlice({
       } else {
         // لو المنتج جديد، نحفظ الكمية اللي المستخدم اختارها
         state.cart.push({ ...action.payload, qty: action.payload.qty || 1 });
-        alert("Product added successfully")
+          Swal.fire({
+  title: "Good job!",
+  text: "تم اضافه المنتج في السله",
+  icon: "success"
+});
         }
     },
     Subtotal: (state) => {
