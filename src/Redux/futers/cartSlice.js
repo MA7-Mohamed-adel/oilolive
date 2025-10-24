@@ -31,11 +31,19 @@ export const cartSlice = createSlice({
           title: `تم تحديث الكمية لـ ${updatedProduct.name}`,
           html: `
             <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
-              <img src="${updatedProduct.images[0]}" alt="${updatedProduct.name}" style="width: 50px; height: 50px; margin-right: 10px; border-radius: 5px;" />
+              <img src="${updatedProduct.images[0]}" alt="${updatedProduct.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
               <div>
                 <div><strong>Price:</strong> ${updatedProduct.price.toFixed(2)} EGP</div>
                 <div><strong>New Quantity:</strong> ${updatedProduct.qty}</div>
               </div>
+            </div>
+            <div style="margin-top: 15px; display: flex; justify-content: space-around; width: 100%;">
+              <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
+                عرض السلة
+              </a>
+              <a href="/checkout" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
+                الدفع
+              </a>
             </div>
           `,
           showConfirmButton: false,
@@ -53,11 +61,19 @@ export const cartSlice = createSlice({
           title: `تمت إضافة ${newProduct.name} إلى السلة`,
           html: `
             <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
-              <img src="${newProduct.images[0]}" alt="${newProduct.name}" style="width: 50px; height: 50px; margin-right: 10px; border-radius: 5px;" />
+              <img src="${newProduct.images[0]}" alt="${newProduct.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
               <div>
                 <div><strong>Price:</strong> ${newProduct.price.toFixed(2)} EGP</div>
                 <div><strong>Quantity:</strong> ${newProduct.qty}</div>
               </div>
+            </div>
+            <div style="margin-top: 15px; display: flex; justify-content: space-around; width: 100%;">
+              <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
+                عرض السلة
+              </a>
+              <a href="/checkout" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
+                الدفع
+              </a>
             </div>
           `,
           showConfirmButton: false,
