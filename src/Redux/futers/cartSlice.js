@@ -41,9 +41,7 @@ export const cartSlice = createSlice({
               <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
                 عرض السلة
               </a>
-              <a href="/checkout" style="background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
-                الدفع
-              </a>
+            
             </div>
           `,
           showConfirmButton: false,
