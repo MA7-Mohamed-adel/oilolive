@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 const initialState = {
   cart: [],
@@ -26,15 +25,15 @@ export const cartSlice = createSlice({
       } else {
         // لو المنتج جديد، نحفظ الكمية اللي المستخدم اختارها
         state.cart.push({ ...action.payload, qty: action.payload.qty || 1 });
-        toast.success("Product added to cart successfully")
-      }
+        alert("Product added successfully")
+        }
     },
     Subtotal: (state) => {
       state.total = calculateTotal(state.cart);
     },
     delate: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
-            toast.error("Product deleted successfully")
+            alert("Product deleted successfully")
 
     },
     onIncomaent: (state, action) => {
