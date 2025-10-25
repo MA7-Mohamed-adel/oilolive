@@ -27,12 +27,12 @@ const productData = {
   brand: "olive-aura",
   name: "OLIVE OIL",
   prices: { // السعر بعد الخصم
-    "1kg": 350,
-    "0.5kg": 175,
+    "1kg": 390,
+    "0.5kg": 195,
   },
   originalPrices: { // السعر الأصلي
-    "1kg": 700,
-    "0.5kg": 350,
+    "1kg": 780,
+    "0.5kg": 390,
   },
   defaultWeight: "1kg",
   description:
@@ -253,7 +253,21 @@ export default function ProductDetails({ product = productData }) {
               >
                 Add to cart
               </Button>
-
+               <Button   variant="outlined"
+                fullWidth
+                sx={{
+                  py: 1.3,
+                  mb: 3,
+                  color: "white",
+                  borderColor: "white",
+                  fontWeight: "500",
+                  textTransform: "none",
+                  borderRadius: "8px",
+                  "&:hover": { borderColor: "grey.300" },
+                }}>
+              Cilck here to  Get the offer 
+               اضغط هنا لتحصل علي العرض
+               </Button>
               <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.2)" }} />
 
               <Box>
