@@ -51,7 +51,7 @@ const OrderDetalis = () => {
                     <CardMedia
                       component="img"
                       sx={{ width: 80, height: 80, borderRadius: 1 }}
-                      image={item.images[0]}
+                      src={item.images[0]}
                       alt={item.name}
                     />
                     <Box sx={{ position: 'absolute', top: -10, right: -10, backgroundColor: 'rgba(90,90,90,0.8)', color: 'white', borderRadius: '50%', width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>

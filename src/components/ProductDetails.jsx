@@ -104,7 +104,7 @@ export default function ProductDetails({ product = productData }) {
                   borderRadius: 2,
                   boxShadow: 3,
                   display: "inline-block", // Changed for better centering with textAlign
-                  marginBottom: {xs: "0px",md:"500px"}
+                  marginBottom: {xs: "0px",md:"500px",}
                 }}
               />
 
