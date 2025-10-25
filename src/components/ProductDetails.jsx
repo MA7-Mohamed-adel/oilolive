@@ -72,10 +72,10 @@ export default function ProductDetails({ product = productData }) {
     const offerPrice = product.prices["1kg"] * 2;
     const offerItem = {
       ...product,
-      id: `${product.id}-offer-2.25kg`, // ID فريد للعرض
+      id: `${product.weight} + 250G `, // ID فريد للعرض
       name: `${product.name} (Offer: 2.25kg)`,
       price: offerPrice,
-      qty: 1, // العرض عبارة عن حزمة واحدة
+      qty: 1, // العرض عبارة عن حزمة واحدة دائماً
       weight: "2.25kg",
       images: product.imagesByWeight["1kg"], // استخدام صور الكيلو للعرض
     };
@@ -267,22 +267,22 @@ export default function ProductDetails({ product = productData }) {
               >
                 Add to cart
               </Button>
-               <Button   variant="outlined"
+               <Button   variant="contained"
                 fullWidth
                 sx={{
                   py: 1.3,
                   mb: 3,
-                  color: "white",
-                  borderColor: "white",
+                  color: "#fff",
+                  backgroundColor: "#2e7d32", // اللون الأخضر
                   fontWeight: "500",
                   textTransform: "none",
                   borderRadius: "8px",
-                  "&:hover": { borderColor: "grey.300" },
+                  "&:hover": { backgroundColor: "#1b5e20" }, // لون أخضر أغمق عند المرور
                 }}
                 onClick={handleOfferAddToCart}
               >
-              Click here to Get the offer 
-               اضغط هنا لتحصل علي العرض
+              Buy 2kg, Get 250g FREE
+               اضغط  لتحصل علي العرض
               </Button>
               <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.2)" }} />
 
