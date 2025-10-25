@@ -72,8 +72,8 @@ export default function ProductDetails({ product = productData }) {
     const offerPrice = product.prices["1kg"] * 2;
     const offerItem = {
       ...product,
-      id: `${product.weight} + 250G `, // ID فريد للعرض
-      name: `${product.name} (Offer: 2.25kg)`,
+      // id: `${product.id} + 250G `, // ID فريد للعرض
+      name: `${product.name} +  250G`,
       price: offerPrice,
       qty: 1, // العرض عبارة عن حزمة واحدة دائماً
       weight: "2.25kg",
@@ -273,11 +273,11 @@ export default function ProductDetails({ product = productData }) {
                   py: 1.3,
                   mb: 3,
                   color: "#fff",
-                  backgroundColor: "#2e7d32", // اللون الأخضر
+                  backgroundColor: "#40bb46", // اللون الأخضر
                   fontWeight: "500",
                   textTransform: "none",
                   borderRadius: "8px",
-                  "&:hover": { backgroundColor: "#1b5e20" }, // لون أخضر أغمق عند المرور
+                  "&:hover": { backgroundColor: "#2b8b32" }, // لون أخضر أغمق عند المرور
                 }}
                 onClick={handleOfferAddToCart}
               >
