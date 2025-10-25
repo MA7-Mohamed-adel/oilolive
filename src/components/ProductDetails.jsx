@@ -70,7 +70,7 @@ export default function ProductDetails({ product = productData }) {
   };
 
   const handleOfferAddToCart = () => {
-    const offerPrice = product.prices["25Kg"] * 2;
+    const offerPrice = product.prices["1kg"] * 2;
     const offerItem = {
       ...product,
       // id: `${product.id} + 250G `, // ID فريد للعرض
@@ -78,7 +78,7 @@ export default function ProductDetails({ product = productData }) {
       price: offerPrice,
       qty: 1, // العرض عبارة عن حزمة واحدة دائماً
       weight: "2.25kg",
-      images: product.imagesByWeight["1kg"], // استخدام صور الكيلو للعرض
+      images: product.imagesByWeight["2.25Kg"], // استخدام صور الكيلو للعرض
     };
     dispatch(addTocart(offerItem));
   };
