@@ -91,51 +91,21 @@ export default function ProductDetails({ product = productData }) {
     <ThemeProvider theme={theme}>
       <Box sx={{ backgroundColor: "rgb(60,60,60)", minHeight: "calc(100vh - 200px)" }}>
         <Container sx={{ py: { xs: 4, md: 6 }, pt: { xs: "80px", md: "100px" } }}>
-          <Grid container spacing={{ xs: 2, md: 15 }}>
-            <Grid item xs={12} md={6}>
+          <Grid container spacing={{ xs: 2, md: 15 }} sx={{ alignItems: "center" }}>
+            <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
               <Box
                 component="img"
                 src={selectedImg}
                 alt="Product"
                 sx={{
                   width: "100%",
-                  maxWidth: "400px",
+                  maxWidth: "250px",
                   borderRadius: 2,
                   boxShadow: 3,
-                  display: "block",
-                  margin: "0 auto",
+                  display: "inline-block", // Changed for better centering with textAlign
                 }}
               />
 
-              <Box
-                display="flex"
-                gap={2}
-                mt={2}
-                justifyContent={{ xs: "center", md: "flex-start" }}
-              >
-                {product.imagesByWeight[selectedWeight].map((img, i) => (
-                  <Box
-                    key={i}
-                    component="img"
-                    src={img}
-                    alt={`thumb-${i}`}
-                    onClick={() => setSelectedImg(img)}
-                    sx={{
-                      width: "80px",
-                      height: "80px",
-                      objectFit: "cover",
-                      borderRadius: 1,
-                      border:
-                        selectedImg === img
-                          ? "2px solid white"
-                          : "2px solid transparent",
-                      cursor: "pointer",
-                      transition: "0.3s",
-                      "&:hover": { border: "2px solid grey" },
-                    }}
-                  />
-                ))}
-              </Box>
             </Grid>
 
             <Grid item xs={12} md={6}>
