@@ -68,6 +68,20 @@ export default function ProductDetails({ product = productData }) {
     dispatch(addTocart(item));
   };
 
+  const handleOfferAddToCart = () => {
+    const offerPrice = product.prices["1kg"] * 2;
+    const offerItem = {
+      ...product,
+      id: `${product.id}-offer-2.25kg`, // ID فريد للعرض
+      name: `${product.name} (Offer: 2.25kg)`,
+      price: offerPrice,
+      qty: 1, // العرض عبارة عن حزمة واحدة
+      weight: "2.25kg",
+      images: product.imagesByWeight["1kg"], // استخدام صور الكيلو للعرض
+    };
+    dispatch(addTocart(offerItem));
+  };
+
   useEffect(() => {
     setSelectedImg(product.imagesByWeight[selectedWeight][0]);
   }, [selectedWeight, product.imagesByWeight]);
@@ -264,10 +278,12 @@ export default function ProductDetails({ product = productData }) {
                   textTransform: "none",
                   borderRadius: "8px",
                   "&:hover": { borderColor: "grey.300" },
-                }}>
-              Cilck here to  Get the offer 
+                }}
+                onClick={handleOfferAddToCart}
+              >
+              Click here to Get the offer 
                اضغط هنا لتحصل علي العرض
-               </Button>
+              </Button>
               <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.2)" }} />
 
               <Box>
