@@ -99,7 +99,7 @@ export default function ProductDetails({ product = productData }) {
                 alt="Product"
                 sx={{
                   width: "100%",
-                  maxWidth: "420px",
+                  maxWidth: "400px",
                   borderRadius: 2,
                   boxShadow: 3,
                   display: "block",
