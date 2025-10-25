@@ -73,7 +73,7 @@ export default function ProductDetails({ product = productData }) {
     const offerItem = {
       ...product,
       // id: `${product.id} + 250G `, // ID فريد للعرض
-      name: `${product.name} +  250G`,
+      name: `${product.name} 2Kg +  250G`,
       price: offerPrice,
       qty: 1, // العرض عبارة عن حزمة واحدة دائماً
       weight: "2.25kg",
