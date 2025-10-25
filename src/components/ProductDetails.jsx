@@ -100,7 +100,7 @@ export default function ProductDetails({ product = productData }) {
                 alt="Product"
                 sx={{
                   width: "100%",
-                  maxWidth: "250px",
+                  maxWidth: "360px",
                   borderRadius: 2,
                   boxShadow: 3,
                   display: "inline-block", // Changed for better centering with textAlign
