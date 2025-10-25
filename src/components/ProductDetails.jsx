@@ -15,7 +15,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import ii from "../assets/ii.jpg"
 import { useDispatch } from "react-redux";
 import { addTocart } from "../Redux/futers/cartSlice";
-
+import qq from "../assets/qq.png"
 const theme = createTheme({
   typography: {
     fontFamily: `"Inter", "Helvetica", "Arial", sans-serif`,
@@ -39,7 +39,8 @@ const productData = {
     "Perfect for:  •	Salad dressings and appetizers •	Light cooking and baking. •	Natural skincare and hair care Free from additives or preservatives, and rich in Vitamin E and healthy fatty acids that support heart health.Pure, authentic taste with premium quality that captures the essence of the Mediterranean. 🌿" ,
   imagesByWeight: {
     "1kg": [ii], 
-    "0.5kg": [ii],  
+    "0.5kg": [ii], 
+    "2.25Kg": [qq]
   },
 };
 
@@ -69,7 +70,7 @@ export default function ProductDetails({ product = productData }) {
   };
 
   const handleOfferAddToCart = () => {
-    const offerPrice = product.prices["1kg"] * 2;
+    const offerPrice = product.prices["25Kg"] * 2;
     const offerItem = {
       ...product,
       // id: `${product.id} + 250G `, // ID فريد للعرض
