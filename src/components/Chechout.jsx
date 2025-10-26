@@ -153,11 +153,7 @@ ${item.name}
                  error={!!errors.state} helperText={errors.state?.message} 
                 />
               </Grid>
-              <Grid width={{xs:"400px",md:"200px"}} item xs={12} md={4}>
-                <TextField fullWidth label="ZIP" {...register("zip", { required: "ZIP is required" })}
-                    error={!!errors.zip} helperText={errors.zip?.message} 
-                />
-              </Grid>
+                
             </Grid>
 
             <Divider sx={{ my: 4 }} />
@@ -225,8 +221,12 @@ ${item.name}
               </Grid>
               <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Typography>Shipping</Typography>
-                {isAddressComplete ? (
-                  <Typography>50.00EGP</Typography>
+                {isAddressComplete ? 
+                  (isCouponValid ? (
+                    <Typography color="success.main" fontWeight="bold">Free</Typography>
+                  ) : (
+                    <Typography>50.00EGP</Typography>
+                  )
                 ) : (
                   <Typography color="text.secondary">Enter address</Typography>
                 )}
