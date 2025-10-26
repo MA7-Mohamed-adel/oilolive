@@ -32,7 +32,6 @@ export default function Chechout() {
   const address = watch("address");
   const city = watch("city");
   const state = watch("state");
-  const zip = watch("zip");
   const couponCode = watch("coupon");
   const paymentMethod = watch("paymentMethod");
 
@@ -40,7 +39,7 @@ export default function Chechout() {
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
-  const isAddressComplete = address && city && state && zip;
+  const isAddressComplete = address && city && state ;
   const isCouponValid = couponCode.toLowerCase() === 'freeship';
   const shippingCost = isAddressComplete && !isCouponValid ? 50 : 0;
   const totalAmount = subtotal + shippingCost;
