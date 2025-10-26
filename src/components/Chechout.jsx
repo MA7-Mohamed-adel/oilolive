@@ -141,13 +141,13 @@ ${item.name}
             <TextField fullWidth label="Apartment (optional)" sx={{ mt: 2 }} {...register("apartment")} />
 
             <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid  width={{xs:"400px",md:"200px"}} item xs={12} md={4}>
+              <Grid   width={{xs:"400px",md:"310px"}}item xs={12} md={4}>
                 <TextField fullWidth label="City" {...register("city", { required: "City is required" })}
                  error={!!errors.city} helperText={errors.city?.message} 
                 />
                 
               </Grid>
-              <Grid width={{xs:"400px",md:"200px"}} item xs={12} md={4}>
+              <Grid  width={{xs:"400px",md:"310px"}} item xs={12} md={4}>
                 <TextField fullWidth label="State" {...register("state", { required: "State is required" })}
                  error={!!errors.state} helperText={errors.state?.message} 
                 />
