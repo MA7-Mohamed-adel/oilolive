@@ -26,20 +26,23 @@ import emailjs from "@emailjs/browser";
 
 export default function Chechout() {
   const { register, handleSubmit, control, watch, formState: { errors } } = useForm({
-    defaultValues: { country: "Egypt", paymentMethod: "cash" },
+    defaultValues: { country: "Egypt", paymentMethod: "cash", coupon: "" },
   });
 
   const address = watch("address");
   const city = watch("city");
   const state = watch("state");
   const zip = watch("zip");
+  const couponCode = watch("coupon");
   const paymentMethod = watch("paymentMethod");
 
   const [saveOrders] = useSaveOrdersMutation();
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
-  const shippingCost = address && city && state && zip ? 50 : 0;
+  const isAddressComplete = address && city && state && zip;
+  const isCouponValid = couponCode.toLowerCase() === 'freeship';
+  const shippingCost = isAddressComplete && !isCouponValid ? 50 : 0;
   const totalAmount = subtotal + shippingCost;
   const dispa = useDispatch();
 
@@ -206,6 +209,15 @@ ${item.name}
               </Grid>
             ))}
 
+            <Divider sx={{ my: 2 }} />
+            <TextField
+              fullWidth
+              label="Discount code"
+              placeholder="Enter your code"
+              variant="outlined"
+              {...register("coupon")}
+            />
+
             <Box width={{xs: "300px",md:"500px"}} sx={{ mt: 3 }}>
               <Grid container justifyContent="space-between">
                 <Typography>Subtotal</Typography>
@@ -213,16 +225,24 @@ ${item.name}
               </Grid>
               <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Typography>Shipping</Typography>
-                {address && city && state && zip ? (
+                {isAddressComplete ? (
                   <Typography>50.00EGP</Typography>
                 ) : (
                   <Typography color="text.secondary">Enter address</Typography>
                 )}
+
+                
               </Grid>
               <Divider sx={{ my: 2 }} />
               <Grid container justifyContent="space-between">
                 <Typography fontWeight="bold">Total</Typography>
-                <Typography fontWeight="bold">{totalAmount.toFixed(2)}EGP</Typography>
+                <Typography fontWeight="bold">
+                  {isCouponValid && isAddressComplete ? (
+                    <><span style={{ textDecoration: 'line-through', color: 'gray', marginRight: '8px' }}>{(subtotal + 50).toFixed(2)}EGP</span> {totalAmount.toFixed(2)}EGP</>
+                  ) : (
+                    `${totalAmount.toFixed(2)}EGP`
+                  )}
+                </Typography>
               </Grid>
             </Box>
           </Paper>
