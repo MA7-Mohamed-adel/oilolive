@@ -255,7 +255,7 @@ export default function ProductDetails({ product = productData }) {
                 onClick={handleOfferAddToCart}
               >
               Buy 2kg, Get 250g FREE
-               اضغط  لتحصل علي العرض
+               | اضغط  لتحصل علي العرض
               </Button>
               <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.2)" }} />
 
