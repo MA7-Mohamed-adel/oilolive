@@ -16,15 +16,10 @@ import { useDispatch } from "react-redux";
 import { addTocart } from "../Redux/futers/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useInView } from "react-intersection-observer";
 
 const Shop = () => {
   const { data: products = [], isLoading, isError } = useGetProductsQuery();
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,7 +67,7 @@ const Shop = () => {
         py: 6,
       }}
     >
-      <Container ref={ref}>
+      <Container >
         <Typography
           variant="h4"
           sx={{
@@ -99,16 +94,10 @@ const Shop = () => {
         )}
 
         {!isLoading && !isError && (
-          <Grid marginLeft={5} container spacing={3}>
-            {products.map((product, index) => (
+          <Grid  container spacing={3}>
+            {products.map((product,) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-                <Slide
-                  direction="left"
-                  in={inView}
-                  mountOnEnter
-                  unmountOnExit
-                  timeout={500 * (index + 1)}
-                >
+              
                   <Card
                     onClick={() => navigate(`/produtdetails/${product.id}`)}
                     sx={{
@@ -129,7 +118,7 @@ const Shop = () => {
                         image={product.image}
                         alt={product.name}
                         sx={{
-                          height: 250,
+                          height: 300,
                           width: "100%",
                           objectFit: "cover",
                           borderRadius: 1,
@@ -216,7 +205,6 @@ const Shop = () => {
                       </Button>
                     </CardContent>
                   </Card>
-                </Slide>
               </Grid>
           ))}
           </Grid>

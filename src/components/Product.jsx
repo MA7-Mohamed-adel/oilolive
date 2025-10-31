@@ -98,7 +98,7 @@ export default function Product() {
 
       {!isLoading && !isError && (
         
-      <Grid marginLeft={4}  container spacing={3}>
+      <Grid   container spacing={3}>
         {/* We only show the first 5 products as featured */}
         {products.slice(0, 5).map((product, index) => (
           <Slide
@@ -125,7 +125,7 @@ export default function Product() {
                   image={product.image}
                   alt={product.name}
                   sx={{
-                    height: 250,
+                    height: 300,
                     width: '100%',
                     objectFit: 'cover',
                     borderRadius: 1,
