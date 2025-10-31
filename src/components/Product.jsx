@@ -20,7 +20,7 @@ import Swal from "sweetalert2";
 
 export default function Product() {
   const { ref, inView } = useInView({
-    triggerOnce:false,
+    triggerOnce:true,
     threshold: 0.1,
   });
 
@@ -108,7 +108,7 @@ export default function Product() {
             unmountOnExit
             timeout={500 * (index + 1)}
           >
-            <Grid marginLeft={5} item xs={12} sm={6} md={4} lg={2.4} key={product.id}>
+            <Grid marginLeft={3} item xs={12} sm={6} md={4} lg={2.4} key={product.id}>
             <Card
               onClick={() => navigate(`/produtdetails/${product.id}`)}
 

@@ -99,7 +99,7 @@ const Shop = () => {
         )}
 
         {!isLoading && !isError && (
-          <Grid marginLeft={8} container spacing={3}>
+          <Grid marginLeft={5} container spacing={3}>
             {products.map((product, index) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
                 <Slide
