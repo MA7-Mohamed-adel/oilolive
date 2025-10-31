@@ -96,7 +96,7 @@ const Shop = () => {
         {!isLoading && !isError && (
           <Grid  container spacing={3}>
             {products.map((product,) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{ mx: { xs: 'auto', sm: 0 } }}>
               
                   <Card
                     onClick={() => navigate(`/produtdetails/${product.id}`)}
