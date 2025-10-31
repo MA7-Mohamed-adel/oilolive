@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import  { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -7,6 +7,7 @@ import {
   Divider,
   Grid,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
@@ -26,11 +27,23 @@ export default function CartPage() {
 const cartItems = useSelector(selactCart)
 const total = useSelector(selactTotal)
 const dispatch = useDispatch();
-  const navegt = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [loadingImages, setLoadingImages] = useState({});
  
     useEffect(() => {
     dispatch(Subtotal());
   }, [cartItems, dispatch]);
+
+  const handleCheckout = () => {
+    setLoading(true);
+    // A small timeout can give the user a sense of transition
+    setTimeout(() => navigate("/chechout"), 300);
+  };
+
+  const handleImageLoad = (id) => {
+    setLoadingImages(prev => ({ ...prev, [id]: false }));
+  };
   return (
     <>
     <Box
@@ -63,12 +76,21 @@ const dispatch = useDispatch();
             <Box key={item.id} sx={{ mb: 3 }}>
               <Grid container spacing={{ xs: 2, sm: 3 }} alignItems="center">
                 <Grid item xs={3} sm={2}>
-                  <Paper
-                    component="img"
-                    src={item.images[0]}
-                    alt={item.name}
-                    sx={{ width: "100px", borderRadius: 1, objectFit: "contain" }}
-                  />
+                  <Box sx={{ width: "100px", minHeight: '100px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {loadingImages[item.id] !== false && (
+                      <CircularProgress size={24} color="inherit" sx={{ position: 'absolute' }} />
+                    )}
+                    <Paper
+                      component="img"
+                      src={item.image}
+                      alt={item.name}
+                      onLoad={() => handleImageLoad(item.id)}
+                      sx={{ 
+                        width: "100px", borderRadius: 1, objectFit: "contain",
+                        visibility: loadingImages[item.id] === false ? 'visible' : 'hidden'
+                      }}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={9} sm={5} md={5}>
                   <Typography variant="subtitle1" fontWeight={600}>{item.name}</Typography>
@@ -132,9 +154,10 @@ const dispatch = useDispatch();
                 "&:hover": { bgcolor: "#ddd" },
                 width: { xs: "100%", sm: "20rem" },
               }}
-              onClick={() => navegt("/chechout")}
+              onClick={handleCheckout}
+              disabled={loading}
             >
-              Check out
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Check out"}
             </Button>
           </Box>
         </>
@@ -151,7 +174,7 @@ const dispatch = useDispatch();
               px: 4,
               "&:hover": { bgcolor: "#ddd" },
             }}
-            onClick={() => navegt("/produtdetails/:id")}
+            onClick={() => navigate("/shop")}
           >
             Continue Shopping
           </Button>

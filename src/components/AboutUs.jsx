@@ -1,30 +1,37 @@
 import React from "react";
-import { Box, Grid, Typography, Button } from "@mui/material";
-import Footer from "./Footer";
+import { Box, Grid, Typography, Button, Slide } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import aa from "../assets/aa.jpg"
+// import { useInView } from "react-intersection-observer";
+import aa from "../assets/aa.jpg";
+
 export default function AboutUs() {
-  const naget = useNavigate()
+  const naget = useNavigate();
+  // const { ref, inView } = useInView({
+  //   triggerOnce: true, 
+  //   threshold: 0.2,
+  // });
   return (
     <>
-    <Box
-      sx={{
-        backgroundColor: "rgb(60,60,60)",
-        minHeight: "100vh", 
-        display: "flex",
+      <Box
+        // ref={ref} 
+        sx={{
+        backgroundColor: "rgb(60, 60, 60)",
+          minHeight: "calc(100vh - 65px)", 
+           display: "flex",
         alignItems: "center", 
         justifyContent: "center",
         px: { xs: 2, sm: 3, md: 5 },
         py: { xs: 4, md: 6 },
       }}
-    >
-      <Grid
-        container
-        spacing={{ xs: 4, md: 6 }}
-        alignItems="center"
-        justifyContent="center"
       >
-        <Grid item xs={12} md={6}>
+        <Grid
+          container
+          spacing={{ xs: 4, md: 6 }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid item xs={12} md={6}>
+            {/* <Slide direction="right" in={inView} timeout={1000}> */}
           <Box
             sx={{
               display: "flex",
@@ -82,41 +89,41 @@ export default function AboutUs() {
                     borderColor: "white",
                   },
                 }}
-                onClick={() => naget("/produtdetails/:id")}
+                onClick={() => naget("/shop")}
               >
                 Product
               </Button>
             </Box>
           </Box>
+            {/* </Slide> */}
+          </Grid>
+
+          {/* الصورة */}
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            {/* <Slide direction="left" in={inView} timeout={1000}> */}
+              <Box
+                component="img"
+                src={aa}
+                alt="Hero"
+                sx={{
+                  width: { xs: "85%", sm: "100%" },
+                  maxWidth: 700,
+                  height: "auto",
+                  objectFit: "contain",
+                  display: "block",
+                  mt: { xs: 2, sm: 4, md: 0 },
+                  mb: 0,
+                }}
+              />
+            {/* </Slide> */}
+          </Grid>
         </Grid>
-
-        {/* الصورة */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
-          <Box
-            component="img"
-            src={aa}
-            alt="Hero"
-            sx={{
-              width: { xs: "85%", sm: "100%" },
-              maxWidth: 700,
-              height: "auto",
-              objectFit: "contain",
-              display: "block",
-              mt: { xs: 2, sm: 4, md: 0 },
-              mb: 0,
-            }}
-          />
-        </Grid>
-      </Grid>
-
-    </Box>
-
+      </Box>
     </>
-    
   );
 }

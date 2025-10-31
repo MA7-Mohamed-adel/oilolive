@@ -17,6 +17,7 @@ import {
   FormControlLabel,
   Radio,
   Collapse,
+  CircularProgress,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, selactCart, selactTotal } from "../Redux/futers/cartSlice";
@@ -35,14 +36,39 @@ export default function Chechout() {
   const couponCode = watch("coupon");
   const paymentMethod = watch("paymentMethod");
 
-  const [saveOrders] = useSaveOrdersMutation();
+  const [saveOrders, { isLoading }] = useSaveOrdersMutation();
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
   const isAddressComplete = address && city && state ;
-  const isCouponValid = couponCode.toLowerCase() === 'freeship';
-  const shippingCost = isAddressComplete && !isCouponValid ? 50 : 0;
-  const totalAmount = subtotal + shippingCost;
+
+  const normalizedCoupon = couponCode.toLowerCase();
+
+  const coupons = {
+    fre: { type: 'shipping', value: 'free' },
+    fr: { type: 'shipping', value: 40 },
+    ol: { type: 'percentage', value: 0.10 },
+    ov: { type: 'fixed', value: 90 },
+    save90: { type: 'fixed', value: 50 },
+  };
+
+  const appliedCoupon = coupons[normalizedCoupon];
+  
+  let shippingCost = isAddressComplete ? 50 : 0;
+  let discountAmount = 0;
+  let originalTotal = subtotal + (isAddressComplete ? 50 : 0);
+
+  if (appliedCoupon) {
+    if (appliedCoupon.type === 'shipping' && isAddressComplete) {
+      shippingCost = appliedCoupon.value === 'free' ? 0 : Math.max(0, 50 - appliedCoupon.value);
+    } else if (appliedCoupon.type === 'percentage') {
+      discountAmount = subtotal * appliedCoupon.value;
+    } else if (appliedCoupon.type === 'fixed') {
+      discountAmount = Math.min(subtotal, appliedCoupon.value); // Ensure discount isn't more than subtotal
+    }
+  }
+
+  const totalAmount = subtotal - discountAmount + shippingCost;
   const dispa = useDispatch();
 
   const onSubmit = async (data) => {
@@ -176,10 +202,11 @@ ${item.name}
               </Collapse>
             </FormControl>
 
-            <Button type="submit" variant="contained" fullWidth sx={{
+            <Button disabled={isLoading} type="submit" variant="contained" fullWidth sx={{
               mt: 3, py: 1.5, color: "white", backgroundColor: "rgb(60,60,60)",
               '&:hover': { backgroundColor: 'rgb(80,80,80)' },
             }}>
+              {isLoading ? <CircularProgress size={24} color="inherit" /> : "Complete Order"}
               Complete Order
             </Button>
           </Paper>
@@ -191,7 +218,7 @@ ${item.name}
               <Grid key={item.id} container spacing={2} alignItems="center" sx={{ mb: 2 }}>
                 <Grid item xs={3}>
                   <Card sx={{ borderRadius: 2, maxWidth: 80 }}>
-                    <CardMedia component="img" height="80" image={item.images[0]} alt={item.name} />
+                    <CardMedia component="img" height="80" image={item.image} alt={item.name} />
                   </Card>
                 </Grid>
                 <Grid item xs={6}>
@@ -221,23 +248,31 @@ ${item.name}
               <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Typography>Shipping</Typography>
                 {isAddressComplete ? 
-                  (isCouponValid ? (
-                    <Typography color="success.main" fontWeight="bold">Free</Typography>
+                  (appliedCoupon && appliedCoupon.type === 'shipping' ? (
+                    <Typography color="success.main" fontWeight="bold">{shippingCost.toFixed(2)}EGP</Typography>
                   ) : (
                     <Typography>50.00EGP</Typography>
                   )
                 ) : (
                   <Typography color="text.secondary">Enter address</Typography>
                 )}
-
-                
               </Grid>
+
+              {discountAmount > 0 && (
+                <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
+                  <Typography color="success.main">Discount</Typography>
+                  <Typography color="success.main" fontWeight="bold">
+                    -{discountAmount.toFixed(2)}EGP
+                  </Typography>
+                </Grid>
+              )}
+
               <Divider sx={{ my: 2 }} />
               <Grid container justifyContent="space-between">
                 <Typography fontWeight="bold">Total</Typography>
                 <Typography fontWeight="bold">
-                  {isCouponValid && isAddressComplete ? (
-                    <><span style={{ textDecoration: 'line-through', color: 'gray', marginRight: '8px' }}>{(subtotal + 50).toFixed(2)}EGP</span> {totalAmount.toFixed(2)}EGP</>
+                  {appliedCoupon && (isAddressComplete || appliedCoupon.type === 'percentage') ? (
+                    <><span style={{ textDecoration: 'line-through', color: 'gray', marginRight: '8px' }}>{originalTotal.toFixed(2)}EGP</span> {totalAmount.toFixed(2)}EGP</>
                   ) : (
                     `${totalAmount.toFixed(2)}EGP`
                   )}

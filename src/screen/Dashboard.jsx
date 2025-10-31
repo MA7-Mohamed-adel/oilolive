@@ -14,6 +14,8 @@ const Dashboard = () => {
     { text: 'Overview', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Orders', icon: <ShoppingCartIcon />, path: '/dashboard/orders' },
     { text: 'Users', icon: <PeopleIcon />, path: '/dashboard/users' },
+    { text: 'Product', icon: <PeopleIcon />, path: '/dashboard/product' },
+    { text: 'addProduct', icon: <PeopleIcon />, path: '/dashboard/addproduct' },
   ];
 
   return (

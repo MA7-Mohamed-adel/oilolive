@@ -11,7 +11,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 const OrderDetalis = () => {
   const { id } = useParams();
   const { data: order, isLoading, isError, error } = useGetOrderByIdQuery(id);
-//   console.log(order)
+  
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
@@ -45,36 +45,40 @@ const OrderDetalis = () => {
             <Typography variant="h6" gutterBottom>Items in Order</Typography>
             <Divider sx={{ mb: 2, borderColor: 'rgba(0, 0, 0, 0.08)' }} />
             <List>
-              {order.items?.map((item) => (
-                <ListItem key={item.id} divider sx={{ alignItems: 'center', py: 2 }}>
-                  <Box sx={{ position: 'relative', mr: 2 }}>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: 80, height: 80, borderRadius: 1 }}
-                      src={item.images[0]}
-                      alt={item.name}
-                    />
-                    <Box sx={{ position: 'absolute', top: -10, right: -10, backgroundColor: 'rgba(90,90,90,0.8)', color: 'white', borderRadius: '50%', width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>
-                      {item.qty}
+              {order.items?.map((item) => {
+                const imageUrl = item.image || '';
+
+                return (
+                  <ListItem key={item.id} divider sx={{ alignItems: 'center', py: 2 }}>
+                    <Box sx={{ position: 'relative', mr: 2 }}>
+                      <CardMedia
+                        component="img"
+                        sx={{ width: 80, height: 80, borderRadius: 1 }}
+                        src={imageUrl}
+                        alt={item.name}
+                      />
+                      <Box sx={{ position: 'absolute', top: -10, right: -10, backgroundColor: 'rgba(90,90,90,0.8)', color: 'white', borderRadius: '50%', width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                        {item.qty}
+                      </Box>
                     </Box>
-                  </Box>
-                  <ListItemText
-                    sx={{ flexGrow: 1, }}
-                    primaryTypographyProps={{ fontWeight: 'bold', variant: 'body1' }}
-                    primary={item.name}
-                    secondaryTypographyProps={{ variant: 'body2', color: 'text.secondary', mt: 0.5 }}
-                    secondary={
-                      <>
-                        <Box component="span">Quantity: {item.qty}</Box>
-                        {item.weight && (
-                          <Box component="span" sx={{ display: 'block' }}>Weight: {item.weight}</Box>
-                        )}
-                      </>
-                    }
-                  />
-                  <Typography variant="h6" fontWeight="bold" sx={{ minWidth: '100px', textAlign: 'right' }}>£{(item.price * item.qty).toFixed(2)}</Typography>
-                </ListItem>
-              ))}
+                    <ListItemText
+                      sx={{ flexGrow: 1, }}
+                      primaryTypographyProps={{ fontWeight: 'bold', variant: 'body1' }}
+                      primary={item.name}
+                      secondaryTypographyProps={{ variant: 'body2', color: 'text.secondary', mt: 0.5 }}
+                      secondary={
+                        <>
+                          <Box component="span">Quantity: {item.qty}</Box>
+                          {item.weight && (
+                            <Box component="span" sx={{ display: 'block' }}>Weight: {item.weight}</Box>
+                          )}
+                        </>
+                      }
+                    />
+                    <Typography variant="h6" fontWeight="bold" sx={{ minWidth: '100px', textAlign: 'right' }}>£{(item.price * item.qty).toFixed(2)}</Typography>
+                  </ListItem>
+                );
+              })}
             </List>
             <Divider sx={{ mt: 2, borderColor: 'rgba(0, 0, 0, 0.08)' }} />
             <Box sx={{ mt: 2, textAlign: 'right' }}>

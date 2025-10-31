@@ -63,8 +63,11 @@ const totalQuantity = cart.cart?.reduce((sum, item) => sum + item.qty, 0) ?? 0;
             <Link  onClick={() => navget("/")} underline="hover" sx={{ color: "#d9d8d1bf",cursor:"pointer" }}>
               Home
             </Link>
-         
-            <Link onClick={() => navget("/contact")} underline="none" sx={{ color: "#d9d8d1bf",cursor:"pointer" }}>
+             <Link onClick={() => navget("/shop")} underline="none" sx={{ color: "#d9d8d1bf",cursor:"pointer" }}>
+              Shop
+            </Link>
+        
+               <Link onClick={() => navget("/contact")} underline="none" sx={{ color: "#d9d8d1bf",cursor:"pointer" }}>
               Contact
             </Link>
           </Box>
@@ -99,7 +102,6 @@ const totalQuantity = cart.cart?.reduce((sum, item) => sum + item.qty, 0) ?? 0;
 
           </Box>
         </Toolbar>
-      <Divider color="white" size="small" />
 
       </AppBar>
 
@@ -108,7 +110,7 @@ const totalQuantity = cart.cart?.reduce((sum, item) => sum + item.qty, 0) ?? 0;
           sx={{ width: 250, backgroundColor: "#2c2c2c", height: "100%", p: 2 }}
         >
           <List>
-            {["Home",  "Contact"].map((text) => (
+            {["Home",  "Contact","Shop"].map((text) => (
               <ListItem button key={text} onClick={() =>
                 handleDrawerNavigation(text.toLowerCase() === "home" ? "/" : `/${text.toLowerCase()}`)
               }>

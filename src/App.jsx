@@ -18,6 +18,12 @@ import Orders from "./screen/Orders";
 import OrderDetalis from "./components/OrderDetalis";
 import CheckoutSucsse from "./components/CheckoutSucsse";
 import useVisitor from "./components/useVisitor";
+import Product from "./components/Product";
+import AddProdut from "./screen/product/ProdcutTable";
+import ProductTable from "./screen/product/ProdcutTable";
+import AddProduct from "./screen/product/AddProduct";
+import EditProduct from "./screen/product/EditProduct";
+import Shop from "./components/Shop";
 
 
 function App() {
@@ -39,6 +45,7 @@ function App() {
         <Route  path="/chechout" element={<Chechout/>}/>
         <Route  path="/sginsuccsefuly" element={<SginSuccsefuly/>}/>
         <Route  path="/checkoutsucsse" element={<CheckoutSucsse/>}/>
+        <Route  path="/shop" element={<Shop/>}/>
         {/* Protected Routes for Admin */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />}>
@@ -46,6 +53,11 @@ function App() {
             <Route path="orders" element={<Orders />} />
             <Route path="users" element={<Users />} />
             <Route path="ordersdetalis/:id" element={<OrderDetalis />} />
+            <Route path="product" element={<ProductTable />} />     
+            <Route path="addproduct" element={<AddProduct />} />
+            <Route path="editproduct/:id" element={<EditProduct />} />
+
+           
           </Route>
         </Route>
       </Routes>

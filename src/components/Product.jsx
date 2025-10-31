@@ -8,61 +8,67 @@ import {
   CardContent,
   Button,
   Chip,
+  CircularProgress,
+  Slide,
 } from "@mui/material";
-import AboutUs from "./AboutUs";
-
-const products = [
-  {
-    id: 1,
-    name: "Automatic Cat Feeder Water Dispenser",
-    price: "£18.50 GBP",
-    image: "https://i.ibb.co/qMTR7F0/cat-feeder.jpg",
-    sale: false,
-    oldPrice: null,
-  },
-  {
-    id: 2,
-    name: "dog leash",
-    price: "£22.00 GBP",
-    oldPrice: "£50.00 GBP",
-    image: "https://i.ibb.co/DwGqBFD/dog-leash.jpg",
-    sale: true,
-  },
-  {
-    id: 3,
-    name: "feeder toy",
-    price: "£12.00 GBP",
-    image: "https://i.ibb.co/kyTYJw2/feeder-toy.jpg",
-    sale: false,
-    oldPrice: null,
-  },
-  {
-    id: 4,
-    name: "Gps pets tracker",
-    price: "From £16.50 GBP",
-    image: "https://i.ibb.co/tY0b0X2/gps-tracker.jpg",
-    sale: false,
-    oldPrice: null,
-  },
-  {
-    id: 5,
-    name: "Portable Dog Water Bottle",
-    price: "From £12.00 GBP",
-    oldPrice: "£20.00 GBP",
-    image: "https://i.ibb.co/2k6yhz5/dog-bottle.jpg",
-    sale: true,
-  },
-];
+import { useGetProductsQuery } from "../Redux/services/product/apiProdcut";
+import { useInView } from "react-intersection-observer";
+import { useDispatch } from "react-redux";
+import { addTocart } from "../Redux/futers/cartSlice";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Product() {
+  const { ref, inView } = useInView({
+    triggerOnce:false,
+    threshold: 0.1,
+  });
+
+  const { data: products = [], isLoading, isError } = useGetProductsQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation(); // Prevents navigating to the product details page
+    const item = {
+      ...product,
+      price: parseFloat(product.price.replace("EGP ", "")),
+      qty: 1, // Add one item
+    };
+    dispatch(addTocart(item));
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: `Added ${item.name} to cart`,
+        html: `
+          <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
+            <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
+            <div>
+              <div><strong>Price:</strong> ${item.price.toFixed(2)} EGP</div>
+              <div><strong>Quantity:</strong> ${item.qty}</div>
+            </div>
+          </div>
+          <div style="margin-top: 15px; display: flex; justify-content: space-around; width: 100%;">
+            <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
+              View Cart
+            </a>
+          </div>
+        `,
+        showConfirmButton: false,
+        timer: 3500,
+        timerProgressBar: true,
+      });
+  };
+
   return (
     <>
     <Box
+      ref={ref}
       sx={{
-        backgroundColor: "rgb(60,60,60)",
+        backgroundColor: "rgb(60, 60, 60)",
         py: 6,
         px: { xs: 2, sm: 4, md: 8 },
-        margin:"-10px"
       }}
     >
       <Typography
@@ -71,16 +77,41 @@ export default function Product() {
           color: "white",
           fontWeight: 500,
           mb: 4,
+          fontSize:"2rem",
           fontFamily: "'Inter', sans-serif",
         }}
       >
         Featured products
       </Typography>
 
-      <Grid container spacing={3}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={2.4} key={product.id}>
+      {isLoading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 5 }}>
+          <CircularProgress color="inherit" />
+        </Box>
+      )}
+
+      {isError && (
+        <Typography color="error" textAlign="center">
+          Failed to load products. Please try again later.
+        </Typography>
+      )}
+
+      {!isLoading && !isError && (
+        
+      <Grid marginLeft={4}  container spacing={3}>
+        {/* We only show the first 5 products as featured */}
+        {products.slice(0, 5).map((product, index) => (
+          <Slide
+            direction="right"
+            in={inView}
+            mountOnEnter
+            unmountOnExit
+            timeout={500 * (index + 1)}
+          >
+            <Grid marginLeft={5} item xs={12} sm={6} md={4} lg={2.4} key={product.id}>
             <Card
+              onClick={() => navigate(`/produtdetails/${product.id}`)}
+
               sx={{
                 backgroundColor: "transparent",
                 color: "white",
@@ -94,6 +125,9 @@ export default function Product() {
                   image={product.image}
                   alt={product.name}
                   sx={{
+                    height: 250,
+                    width: '100%',
+                    objectFit: 'cover',
                     borderRadius: 1,
                     mb: 2,
                   }}
@@ -163,16 +197,19 @@ export default function Product() {
                       borderColor: "white",
                     },
                   }}
+                  onClick={(e) => handleAddToCart(e, product)}
                 >
-                  Choose options
+                  Add to cart 
                 </Button>
               </CardContent>
             </Card>
           </Grid>
+          </Slide>
         ))}
       </Grid>
+      )}
     </Box>
-    <AboutUs/>
+    {/* <AboutUs/> */}
     </>
   );
 }

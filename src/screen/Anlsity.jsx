@@ -11,9 +11,10 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { useGetUsersQuery } from "../Redux/services/auth/authApiServices";
 import { useGetOrdersQuery } from "../Redux/services/orders/ApiOrdersServices";
+import { useGetProductsQuery } from "../Redux/services/product/apiProdcut";
 import useVisitorsData from "../Redux/services/useVisitorsData";
 import ChartO from "./chart/ChartO";
 import ChartD from "./chart/ChartD";
@@ -52,7 +53,8 @@ const StatCard = ({ icon, title, value, color }) => (
 const Anlsity = () => {
   const { data: users = [], isLoading } = useGetUsersQuery();
   const { data: orders = [], isLoading: isLoadingOrders } = useGetOrdersQuery();
-  const { online, total } = useVisitorsData();
+  const { data: products = [], isLoading: isLoadingProducts } = useGetProductsQuery();
+  const {total } = useVisitorsData();
 
   const totalRevenue = orders.reduce(
     (sum, order) => sum + (order.totalAmount || 0),
@@ -83,10 +85,10 @@ const Anlsity = () => {
       color: "warning.dark",
     },
     {
-      title: "Online Now",
-      value: online ?? 0,
-      icon: <VisibilityIcon />,
-      color: "primary.dark",
+      title: "Total Products",
+      value: isLoadingProducts ? <CircularProgress size={24} /> : products.length,
+      icon: <InventoryIcon />,
+      color: "secondary.dark",
     },
     {
       title: "Online ",

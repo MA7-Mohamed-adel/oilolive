@@ -21,61 +21,14 @@ export const cartSlice = createSlice({
       );
 
       if (index >= 0) {
-        // لو المنتج موجود، نزود الكمية بمقدار اللي المستخدم اختاره
         const updatedProduct = state.cart[index];
         updatedProduct.qty += action.payload.qty || 1;
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'success',
-          title: `تم تحديث الكمية لـ ${updatedProduct.name}`,
-          html: `
-            <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
-              <img src="${updatedProduct.images[0]}" alt="${updatedProduct.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
-              <div>
-                <div><strong>Price:</strong> ${updatedProduct.price.toFixed(2)} EGP</div>
-                <div><strong>New Quantity:</strong> ${updatedProduct.qty}</div>
-              </div>
-            </div>
-            <div style="margin-top: 15px; display: flex; justify-content: space-around; width: 100%;">
-              <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
-                عرض السلة
-              </a>
-            
-            </div>
-          `,
-          showConfirmButton: false,
-          timer: 3500,
-          timerProgressBar: true,
-        });
+      
       } else {
         // لو المنتج جديد، نحفظ الكمية اللي المستخدم اختارها
         const newProduct = { ...action.payload, qty: action.payload.qty || 1 };
         state.cart.push(newProduct);
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'success',
-          title: `تمت إضافة ${newProduct.name} إلى السلة`,
-          html: `
-            <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
-              <img src="${newProduct.images[0]}" alt="${newProduct.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
-              <div>
-                <div><strong>Price:</strong> ${newProduct.price.toFixed(2)} EGP</div>
-                <div><strong>Quantity:</strong> ${newProduct.qty}</div>
-              </div>
-            </div>
-            <div style="margin-top: 15px; display: flex; justify-content: space-around; width: 100%;">
-              <a href="/cart" style="background-color: #f0f0f0; color: #333; border: none; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-size: 14px; cursor: pointer;">
-                عرض السلة
-              </a>
-              
-            </div>
-          `,
-          showConfirmButton: false,
-          timer: 3500,
-          timerProgressBar: true,
-        });
+
       }
     },
     Subtotal: (state) => {
