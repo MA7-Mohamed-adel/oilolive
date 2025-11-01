@@ -94,16 +94,15 @@ export default function Product() {
 
       {!isLoading && !isError && (
         
-      <Grid   container spacing={4}>
+      <Grid   container spacing={2}>
         {/* We only show the first 5 products as featured */}
         {products.map((product) => (
         
-            <Grid item xs={6} sm={4} md={3} lg={2.4} key={product.id} sx={{ mx: { xs: "0px", sm: 0 }, ml: { sm: 2 } }}>
+            <Grid width={{xs:160,md:200}} item xs={6} sm={4} md={3} lg={2.4} key={product.id} sx={{ mx: { xs: "0px", sm: 0 }, ml: { sm: 2 } }}>
             <Card
               onClick={() => navigate(`/produtdetails/${product.id}`)}
 
               sx={{
-                width: "163px",
                 backgroundColor: "transparent",
                 height:"100%",
                 color: "white",

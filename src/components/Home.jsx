@@ -126,7 +126,7 @@ export default function Home() {
                     }}
                     onClick={() => navegt("/shop")}
                   >
-                    Shop new
+                    Shop now
                   </Button>
                 </Slide>
               </Box>
