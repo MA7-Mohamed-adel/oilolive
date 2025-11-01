@@ -12,17 +12,13 @@ import {
   Slide,
 } from "@mui/material";
 import { useGetProductsQuery } from "../Redux/services/product/apiProdcut";
-import { useInView } from "react-intersection-observer";
 import { useDispatch } from "react-redux";
 import { addTocart } from "../Redux/futers/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function Product() {
-  const { ref, inView } = useInView({
-    triggerOnce:true,
-    threshold: 0.1,
-  });
+ 
 
   const { data: products = [], isLoading, isError } = useGetProductsQuery();
   const navigate = useNavigate();
@@ -64,7 +60,7 @@ export default function Product() {
   return (
     <>
     <Box
-      ref={ref}
+      
       sx={{
         backgroundColor: "rgb(60, 60, 60)",
         py: 6,
@@ -98,22 +94,18 @@ export default function Product() {
 
       {!isLoading && !isError && (
         
-      <Grid   container spacing={3}>
+      <Grid   container spacing={4}>
         {/* We only show the first 5 products as featured */}
-        {products.slice(0, 5).map((product, index) => (
-          <Slide
-            direction="right"
-            in={inView}
-            mountOnEnter
-            unmountOnExit
-            timeout={500 * (index + 1)}
-          >
-            <Grid item xs={12} sm={6} md={4} lg={2.4} key={product.id} sx={{ mx: { xs: 'auto', sm: 0 }, ml: { sm: 2 } }}>
+        {products.map((product) => (
+        
+            <Grid item xs={6} sm={4} md={3} lg={2.4} key={product.id} sx={{ mx: { xs: "0px", sm: 0 }, ml: { sm: 2 } }}>
             <Card
               onClick={() => navigate(`/produtdetails/${product.id}`)}
 
               sx={{
+                width: "163px",
                 backgroundColor: "transparent",
+                height:"100%",
                 color: "white",
                 boxShadow: "none",
                 textAlign: "center",
@@ -204,12 +196,10 @@ export default function Product() {
               </CardContent>
             </Card>
           </Grid>
-          </Slide>
         ))}
       </Grid>
       )}
     </Box>
-    {/* <AboutUs/> */}
     </>
   );
 }

@@ -9,7 +9,7 @@ import {
   Button,
   Chip,
   CircularProgress,
-  Container, Slide,
+  Container,
 } from "@mui/material";
 import { useGetProductsQuery } from "../Redux/services/product/apiProdcut";
 import { useDispatch } from "react-redux";
@@ -19,17 +19,15 @@ import Swal from "sweetalert2";
 
 const Shop = () => {
   const { data: products = [], isLoading, isError } = useGetProductsQuery();
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleAddToCart = (e, product) => {
-    e.stopPropagation(); // Prevents navigating to the product details page
+    e.stopPropagation(); // Prevent navigation to product details
     const item = {
       ...product,
       price: parseFloat(product.price.replace("EGP ", "")),
-      qty: 1, // Add one item
+      qty: 1,
     };
     dispatch(addTocart(item));
     Swal.fire({
@@ -39,9 +37,7 @@ const Shop = () => {
       title: `Added ${item.name} to cart`,
       html: `
         <div style="display: flex; align-items: center; text-align: left; direction: ltr;">
-          <img src="${item.image}" alt="${
-        item.name
-      }" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
+          <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; margin-right: 15px; border-radius: 8px; object-fit: cover;" />
           <div>
             <div><strong>Price:</strong> ${item.price.toFixed(2)} EGP</div>
             <div><strong>Quantity:</strong> ${item.qty}</div>
@@ -67,7 +63,7 @@ const Shop = () => {
         py: 6,
       }}
     >
-      <Container >
+      <Container>
         <Typography
           variant="h4"
           sx={{
@@ -94,119 +90,127 @@ const Shop = () => {
         )}
 
         {!isLoading && !isError && (
-          <Grid  container spacing={3}>
-            {products.map((product,) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{ mx: { xs: 'auto', sm: 0 } }}>
-              
-                  <Card
-                    onClick={() => navigate(`/produtdetails/${product.id}`)}
-                    sx={{
-                      backgroundColor: "transparent",
-                      color: "white",
-                      boxShadow: "none",
-                      textAlign: "center",
-                      cursor: "pointer",
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      mx: "auto", // Center the card
-                    }}
-                  >
-                    <Box sx={{ position: "relative" }}>
-                      <CardMedia
-                        component="img"
-                        image={product.image}
-                        alt={product.name}
+          <Grid container spacing={{ xs: 2, sm: 3 }}>
+            {products.map((product) => (
+              <Grid
+                item
+                xs={6}
+                sm={4}
+                md={3}
+                lg={2.4}
+                key={product.id}
+              >
+                <Card 
+             
+                  onClick={() => navigate(`/produtdetails/${product.id}`)}
+                  sx={{
+                    width: "170px",
+                    backgroundColor: "transparent",
+                    color: "white",
+                    boxShadow: "none",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    mx: "auto",
+                  }}
+                >
+                  <Box sx={{ position: "relative" }}>
+                    <CardMedia
+                      component="img"
+                      image={product.image}
+                      alt={product.name}
+                      sx={{
+                        height: 300,
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: 1,
+                        mb: 2,
+                        mx: "auto",
+                      }}
+                    />
+                    {product.sale && (
+                      <Chip
+                        label="Sale"
+                        size="small"
                         sx={{
-                          height: 300,
-                          width: "100%",
-                          objectFit: "cover",
-                          borderRadius: 1,
-                          mb: 2,
-                          mx: "auto",
+                          position: "absolute",
+                          top: 10,
+                          left: 10,
+                          backgroundColor: "white",
+                          color: "#2c2c2c",
+                          fontWeight: 500,
                         }}
                       />
-                      {product.sale && (
-                        <Chip
-                          label="Sale"
-                          size="small"
-                          sx={{
-                            position: "absolute",
-                            top: 10,
-                            left: 10,
-                            backgroundColor: "white",
-                            color: "#2c2c2c",
-                            fontWeight: 500,
-                          }}
-                        />
-                      )}
-                    </Box>
-                    <CardContent
-                      sx={{
-                        p: 0,
-                        flexGrow: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            color: "rgba(255,255,255,0.85)",
-                            mb: 1,
-                            fontFamily: "'Inter', sans-serif",
-                          }}
-                        >
-                          {product.name}
-                        </Typography>
-                        <Box sx={{ mb: 2 }}>
-                          {product.oldPrice && (
-                            <Typography
-                              component="span"
-                              sx={{
-                                textDecoration: "line-through",
-                                color: "rgba(255,255,255,0.5)",
-                                mr: 1,
-                                fontSize: "0.9rem",
-                              }}
-                            >
-                              {product.oldPrice}
-                            </Typography>
-                          )}
+                    )}
+                  </Box>
+                  <CardContent
+                    sx={{
+                      p: 0,
+                      flexGrow: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "rgba(255,255,255,0.85)",
+                          mb: 1,
+                          fontFamily: "'Inter', sans-serif",
+                        }}
+                      >
+                        {product.name}
+                      </Typography>
+                      <Box sx={{ mb: 2 }}>
+                        {product.oldPrice && (
                           <Typography
                             component="span"
                             sx={{
-                              color: "white",
-                              fontWeight: 500,
-                              fontSize: "1rem",
+                              textDecoration: "line-through",
+                              color: "rgba(255,255,255,0.5)",
+                              mr: 1,
+                              fontSize: "0.9rem",
                             }}
                           >
-                            {product.price}
+                            {product.oldPrice}
                           </Typography>
-                        </Box>
+                        )}
+                        <Typography
+                          component="span"
+                          sx={{
+                            color: "white",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                          }}
+                        >
+                          {product.price}
+                        </Typography>
                       </Box>
-                      <Button
-                        variant="outlined"
-                        fullWidth
-                        sx={{
+                    </Box>
+                    <Button
+                      variant="outlined"
+                      fullWidth
+                      sx={{
+                        borderColor: "white",
+                        color: "white",
+                        textTransform: "none",
+                        "&:hover": {
+                          backgroundColor: "rgba(255,255,255,0.1)",
                           borderColor: "white",
-                          color: "white",
-                          textTransform: "none",
-                          "&:hover": {
-                            backgroundColor: "rgba(255,255,255,0.1)",
-                            borderColor: "white",
-                          },
-                        }}
-                        onClick={(e) => handleAddToCart(e, product)}
-                      >
-                        Add to cart
-                      </Button>
-                    </CardContent>
-                  </Card>
+                        },
+                      }}
+                      onClick={(e) => handleAddToCart(e, product)}
+                    >
+                      Add to cart
+                    </Button>
+                  </CardContent>
+                </Card>
               </Grid>
-          ))}
+            ))}
           </Grid>
         )}
       </Container>

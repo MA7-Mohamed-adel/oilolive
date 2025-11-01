@@ -110,7 +110,7 @@ const totalQuantity = cart.cart?.reduce((sum, item) => sum + item.qty, 0) ?? 0;
           sx={{ width: 250, backgroundColor: "#2c2c2c", height: "100%", p: 2 }}
         >
           <List>
-            {["Home",  "Contact","Shop"].map((text) => (
+            {["Home",  "Shop","Contact"].map((text) => (
               <ListItem button key={text} onClick={() =>
                 handleDrawerNavigation(text.toLowerCase() === "home" ? "/" : `/${text.toLowerCase()}`)
               }>
