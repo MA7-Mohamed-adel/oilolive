@@ -5,7 +5,7 @@ import { db, storage } from "../../../Firebase/firebase";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const producttag = apiServices.enhanceEndpoints({
-  addTagTypes: ["product"],
+  addTagTypes: ["product","products"],
 });
 
 export const ProductApi = producttag.injectEndpoints({
@@ -28,7 +28,6 @@ export const ProductApi = producttag.injectEndpoints({
             createdAt: serverTimestamp(),
           };
 
-          // 6. Save the final product data to Firestore.
           const docRef = doc(db, "products", key);
           await setDoc(docRef, finalProductData);
 
@@ -51,7 +50,7 @@ export const ProductApi = producttag.injectEndpoints({
           return { error };
         }
       },
-      providesTags: ["product"],
+      providesTags: ["product","products"],
     }),
     getProductById: builder.query({
       async queryFn(id) {
@@ -67,8 +66,8 @@ export const ProductApi = producttag.injectEndpoints({
           return { error };
         }
       },
-      providesTags: (result, error, id) => [{ type: 'product', id }],
-    }),
+     providesTags:["product","products"]
+     }),
     updateProduct: builder.mutation({
       async queryFn({ id, updatedProduct, newImageFile, oldImageUrl }) {
         try {
@@ -91,7 +90,7 @@ export const ProductApi = producttag.injectEndpoints({
           return { error };
         }
       },
-      invalidatesTags: (result, error, { id }) => ["product", { type: 'product', id }],
+     invalidatesTags:["product","products"]
     }),
     deleteProduct: builder.mutation({
       async queryFn({ id, image }) {
@@ -108,7 +107,7 @@ export const ProductApi = producttag.injectEndpoints({
           return { error };
         }
       },
-      invalidatesTags: ["product"],
+   invalidatesTags:["product","products"]
     }),
   }),
 });

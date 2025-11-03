@@ -57,7 +57,7 @@ export const OrderApi = ordersTag.injectEndpoints({
                 return { error };
             }
         },
-        providesTags: (result, error, id) => [{ type: 'Orders', id }],
+        providesTags: ["Orders"],
     }),
   
     })
