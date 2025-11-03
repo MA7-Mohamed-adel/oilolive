@@ -20,7 +20,7 @@ import Swal from "sweetalert2";
 export default function Product() {
  
 
-  const { data: products = [], isLoading, isError } = useGetProductsQuery();
+  const { data: products = [], isError } = useGetProductsQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -80,11 +80,7 @@ export default function Product() {
         Featured products
       </Typography>
 
-      {isLoading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', my: 5 }}>
-          <CircularProgress color="inherit" />
-        </Box>
-      )}
+     
 
       {isError && (
         <Typography color="error" textAlign="center">
@@ -92,7 +88,7 @@ export default function Product() {
         </Typography>
       )}
 
-      {!isLoading && !isError && (
+   
         
       <Grid   container spacing={2}>
         {/* We only show the first 5 products as featured */}
@@ -197,7 +193,7 @@ export default function Product() {
           </Grid>
         ))}
       </Grid>
-      )}
+      
     </Box>
     </>
   );

@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Shop = () => {
-  const { data: products = [], isLoading, isError } = useGetProductsQuery();
+  const { data: products = [], isError } = useGetProductsQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -77,11 +77,6 @@ const Shop = () => {
           All Products
         </Typography>
 
-        {isLoading && (
-          <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
-            <CircularProgress color="inherit" />
-          </Box>
-        )}
 
         {isError && (
           <Typography color="error" textAlign="center">
@@ -89,7 +84,7 @@ const Shop = () => {
           </Typography>
         )}
 
-        {!isLoading && !isError && (
+        
           <Grid   container spacing={{ xs: 2, sm: 3 }}>
             {products.map((product) => (
               <Grid
@@ -214,7 +209,7 @@ const Shop = () => {
               </Grid>
             ))}
           </Grid>
-        )}
+        
       </Container>
     </Box>
   );
