@@ -94,7 +94,7 @@ export default function Product() {
         {/* We only show the first 5 products as featured */}
         {products.map((product) => (
         
-            <Grid width={{xs:140,md:200}} item xs={6} sm={4} md={3} lg={2.4} key={product.id} sx={{ mx: { xs: "0px", sm: 0 }, ml: { sm: 2 } }}>
+            <Grid width={{xs:145,md:200}} item xs={6} sm={4} md={3} lg={2.4} key={product.id} sx={{ mx: { xs: "0px", sm: 0 }, ml: { sm: 2 } }}>
             <Card
               onClick={() => navigate(`/produtdetails/${product.id}`)}
 
