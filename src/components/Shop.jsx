@@ -94,14 +94,13 @@ const Shop = () => {
                 md={3}
                 lg={2.4}
                 key={product.id}
-                width={{xs:170,md:200}}
+                width={{xs:140,md:200}}
                 height={"100%"}
               >
                 <Card 
              
                   onClick={() => navigate(`/produtdetails/${product.id}`)}
                   sx={{
-                    // width: "170px",
                     backgroundColor: "transparent",
                     color: "white",
                     boxShadow: "none",
