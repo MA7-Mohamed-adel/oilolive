@@ -186,7 +186,7 @@ export default function ProductDetails() {
                       minWidth: "100px",
                     }}
                   >
-                    <Typography>{product.weight} Kallo</Typography>
+                    <Typography>{product.weight} Kilo</Typography>
                   </Box>
                 </Box>
               )}
