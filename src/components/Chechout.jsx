@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Box,
@@ -35,8 +35,9 @@ export default function Chechout() {
   const state = watch("state");
   const couponCode = watch("coupon");
   const paymentMethod = watch("paymentMethod");
+  const [loading, setLoading] = useState(false);
 
-  const [saveOrders, { isLoading }] = useSaveOrdersMutation();
+  const [saveOrders, ] = useSaveOrdersMutation();
   const navigate = useNavigate();
   const cart = useSelector(selactCart);
   const subtotal = useSelector(selactTotal);
@@ -81,6 +82,7 @@ export default function Chechout() {
       fullname: `${data.firstName} ${data.lastName}`,
       createdAt: new Date().toISOString(),
     };
+   setLoading(true)
 
     try {
       await saveOrders(orderData).unwrap();
@@ -202,12 +204,13 @@ ${item.name}
               </Collapse>
             </FormControl>
 
-            <Button disabled={isLoading} type="submit" variant="contained" fullWidth sx={{
+            <Button disabled={loading} type="submit" variant="contained" fullWidth sx={{
               mt: 3, py: 1.5, color: "white", backgroundColor: "rgb(60,60,60)",
               '&:hover': { backgroundColor: 'rgb(80,80,80)' },
-            }}>
-              {isLoading ? <CircularProgress size={24} color="inherit" /> : "Complete Order"}
-              Complete Order
+            }}
+            >
+              {loading ? <CircularProgress size={24} color="inherit" /> : " Complete Order"}
+             
             </Button>
           </Paper>
         </Grid>
