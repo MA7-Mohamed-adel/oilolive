@@ -94,7 +94,7 @@ const Shop = () => {
                 md={3}
                 lg={2.4}
                 key={product.id}
-                width={{xs:150,md:200}}
+                sx={{ margin: "auto" }}
                 height={"100%"}
               >
                 <Card 
