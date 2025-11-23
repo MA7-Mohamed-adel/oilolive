@@ -85,7 +85,7 @@ const Shop = () => {
         )}
 
         
-          <Grid   container spacing={{ xs: 2, sm: 3 }}>
+          <Grid    container width={"100%"}>
             {products.map((product) => (
               <Grid
                 item
